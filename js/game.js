@@ -101,7 +101,7 @@ const Game = function() {
 	}
 
 	this.takeCards = function(p) {
-		for (let c = this.inPlay.length - 1; c > -1; c -= 1) {
+		for (let c = 0; c < this.inPlay.length; c++) {
 			this.players[p].hand.push(this.inPlay[c]);
 		}
 		this.inPlay = [];

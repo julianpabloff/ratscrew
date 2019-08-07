@@ -8,8 +8,8 @@ let x = Math.floor(process.stdout.columns / 2) - 7;
 let y = Math.floor(process.stdout.rows / 2) - 5;
 
 const controls = [
-	{flip: "z", slap: "q"},
-	{flip: "m", slap: "p"},
+	{flip: "a", slap: "q"},
+	{flip: "s", slap: "w"},
 	{flip: "d", slap: "e"},
 	{flip: "f", slap: "r"},
 ];
