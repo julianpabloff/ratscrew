@@ -15,21 +15,23 @@ const controls = [
 ];
 
 let cardChanged = false;
+let menuChanged = true;
 let playAgain = true;
 
 const updateDynamic = function() {
 
 	if (game.state == 0) {
-		if (controller.left && game.playerNum > 2) game.playerNum--;
-		if (controller.right && game.playerNum < 4) game.playerNum++;
+		if (controller.left && game.playerNum > 2) { game.playerNum--; menuChanged = true; }
+		if (controller.right && game.playerNum < 4) { game.playerNum++; menuChanged = true; }
 		if (controller.enter) {
 			game.addPlayers(game.playerNum, controls);
 			controller.addPlayerControls(game.players);
 			game.dealCards();
 			game.state = 1;
 			updateStatic();
-		} else {
+		} else if (menuChanged) { // UPDATE IF NEEDED
 			display.drawMenu(game.playerNum);
+			menuChanged = false;
 		}
 	}
 
@@ -55,8 +57,7 @@ const updateDynamic = function() {
 			return;
 		}
 
-		// UPDATE IF NEEDED
-		if (cardChanged) {
+		if (cardChanged) { // UPDATE IF NEEDED
 			display.updateTopCard(game.inPlay[game.inPlay.length - 1]);
 			display.updateStats(game.players, game.turn, game.faceChances, false);
 		}
