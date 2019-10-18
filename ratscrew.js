@@ -1,17 +1,17 @@
-const Game = require("./game.js");
+const Game = require("./js/game.js");
 game = new Game;
-const display = new (require("./display.js"));
-const Controller = require("./controller.js");
+const display = new (require("./js/display.js"));
+const Controller = require("./js/controller.js");
 const controller = new Controller.Controller;
 
 let x = Math.floor(process.stdout.columns / 2) - 7;
 let y = Math.floor(process.stdout.rows / 2) - 5;
 
 const controls = [
-	{flip: "a", slap: "q"},
-	{flip: "s", slap: "w"},
-	{flip: "d", slap: "e"},
-	{flip: "f", slap: "r"},
+	{flip: "z", slap: "q"},
+	{flip: "c", slap: "r"},
+	{flip: "b", slap: "y"},
+	{flip: "m", slap: "p"},
 ];
 
 let cardChanged = false;
@@ -38,8 +38,6 @@ const updateDynamic = function() {
 	else if (game.state == 1) {
 		cardChanged = false;
 		if (game.players[game.turn].controller.flip && !game.faceOver) { game.flipCard(); cardChanged = true; }
-		// if (game.flipCard()) { game.state = 'takeCards'; updateDynamic(); updateStatic(); return }
-
 		for (let p in game.players) {
 			if (game.players[p].controller.slap) {
 				if (game.evalSlap(p)) game.takeCards(p); cardChanged = true;
@@ -141,5 +139,6 @@ setInterval(() => {
 		updateDynamic();
 		rows = process.stdout.rows;
 		columns = process.stdout.columns;
+		menuChanged = true;
 	}
 }, 17);

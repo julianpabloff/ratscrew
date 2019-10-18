@@ -124,10 +124,10 @@ const Game = function() {
 
 	this.reset = function() {
 		this.state = 0;
-		//for (let i in this.inPlay) delete this.inPlay[i];
-		//for (let p in this.players) delete this.players[p];
+		// for (let i in this.inPlay) delete this.inPlay[i];
+		// for (let p in this.players) delete this.players[p];
 		this.players = [];
-		console.log(this.players);
+		// console.log(this.players);
 		this.turn = 0;
 		this.shuffle();
 		this.faceChances = 0;

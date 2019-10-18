@@ -3,8 +3,8 @@ const Display = function() {
 	let stdout = process.stdout;
 
 	const colors = {
-		fg : {red:'\x1b[31m', magenta:'\x1b[35m', cyan:'\x1b[36m', white:'\x1b[37m'},
 		bg : {},
+			 fg : {red:'\x1b[31m', magenta:'\x1b[35m', cyan:'\x1b[36m', white:'\x1b[37m'},
 	};
 
 	this.clear = () => stdout.write('\x1b[2J');
@@ -77,6 +77,21 @@ const Display = function() {
 		' ╚══════════════════════════════════════════════════════════════════════╝ ',
 	];
 
+	this.drawBox = function(x,y,w,h) {
+		stdout.cursorTo(x,y);
+		let borderTop = '';
+		for (let i = 0; i < w - 2; i++) borderTop += '─';
+		stdout.write('┌' + borderTop + '┐');
+		for (let i = 1; i <= h - 2; i++) {
+			stdout.cursorTo(x, y + i);
+			stdout.write('│');
+			stdout.cursorTo(x + w - 1, y + i);
+			stdout.write('│');
+		}
+		stdout.cursorTo(x, y + h - 1);
+		stdout.write('└' + borderTop + '┘');
+	}
+
 	this.drawLogo = function() {
 		this.clear();
 		if (columns >= logo[0].length + logo.length) {
@@ -121,8 +136,8 @@ const Display = function() {
 		stdout.write('< ' + playerNum.toString() + ' >');
 	}
 
-	let lastCardPos = {x: null, y: null};
 
+	let lastCardPos = {x: null, y: null};
 	this.drawCard = function(card, x, y) {
 		let suit = card.suit;
 		let value = cardVals[card.value];
