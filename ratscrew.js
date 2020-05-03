@@ -9,7 +9,7 @@ let y = Math.floor(process.stdout.rows / 2) - 5;
 
 const controls = [
 	{flip: "z", slap: "q"},
-	{flip: "c", slap: "r"},
+	{flip: "m", slap: "p"},
 	{flip: "b", slap: "y"},
 	{flip: "m", slap: "p"},
 ];
